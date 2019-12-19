@@ -94,13 +94,13 @@ For this insight, we categorize it as 'Operational' dynamically set the severity
 
 Publish Insight
 ------------------
-The last step is to publish the insight to Overwatch.
+The last step is to publish the insight to Beacon.
    ```go
 
-    // Publish the insight to Overwatch
+    // Publish the insight to Beacon
     func publishInsight(token string, account string, insight *InsightRequest) {
 
-        urlPath := "https://api.cloudservices.f5.com/v1/svc-overwatch/insights"
+        urlPath := "https://api.cloudservices.f5.com/beacon/v1/insights"
         verb := http.MethodPost
         inputByte, err := json.Marshal(insight)
         if err != nil {
