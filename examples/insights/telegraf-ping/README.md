@@ -40,7 +40,7 @@ The handler function describes the main operations of the Lambda function:
 
   * **Login** - Login to F5 Cloud Services to obtain an API token
   * **Build Ping insight** - Query for metrics and create an insight struct
-  * **Publish insight** - publish the insight to Overwatch
+  * **Publish insight** - publish the insight to Beacon
 
 **Log in**
 
@@ -65,7 +65,7 @@ we construct an Insight with a title, description, and detailed markdown content
 For this insight, we categorize it as 'Operational' dynamically set the severity based on the metric value.
 
 ```go
-    // Build an Overwatch insight based on ping metric results
+    // Build a Beacon insight based on ping metric results
     func buildPingInsight(token string, account string) (*InsightRequest, error) {
 
         // Query the ping metric
