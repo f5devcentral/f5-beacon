@@ -1,0 +1,9 @@
+# github.com/aws/aws-lambda-go v1.13.2
+github.com/aws/aws-lambda-go/lambda
+github.com/aws/aws-lambda-go/lambda/handlertrace
+github.com/aws/aws-lambda-go/lambda/messages
+github.com/aws/aws-lambda-go/lambdacontext
+# github.com/influxdata/influxdb1-client v0.0.0-20190809212627-fc22c7df067e
+github.com/influxdata/influxdb1-client/v2
+github.com/influxdata/influxdb1-client/models
+github.com/influxdata/influxdb1-client/pkg/escape
