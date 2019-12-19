@@ -146,3 +146,5 @@ Run AWS Lambda periodically
 To gather insight details over a long period of time it is common to run the function periodically and update the insight with the latest details.
 Depending on the insight, you might want to run it every hour, day or week for a meaningful report.  In our simplified example, we will
 want to run the function every hour.  We will utilize the AWS CloudWatch Events scheduler to configure periodic execution.
+
+![](images/F5CS_Beacon.Service-aws-cw-rule.png)
