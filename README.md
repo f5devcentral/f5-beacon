@@ -14,7 +14,8 @@ This repository includes resources, artifacts and examples that can be leveraged
 
 ## Documentation
 
-For the documentation on F5 Beacon, refer to our User guide at [https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html](https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html).
+For the documentation on F5 Beacon, refer to our user guide at:<br>
+[https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html](https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html)
 
 
 ## Support Information
