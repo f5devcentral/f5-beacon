@@ -8,7 +8,7 @@ F5 Beacon is an application-centric inventory and business analytics/intelligenc
 
 For more information, visit: https://f5.com/beacon
 
-## Purpose of this reposistory
+## Purpose of this repository
 
 This repository includes resources, artifacts and examples that can be leveraged in use with F5 Beacon. 
 
