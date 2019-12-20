@@ -1,4 +1,4 @@
-**Publish Custom Beacon Insights using Beacon lambda example**
+**Publish Custom Beacon Insights using AWS Lambda**
 
 The **Insights View** page within F5 Beacon is a centralized location to get insightful information about your application ecosystem.
 Insights are divided into three categories **Cost**, **Operations** and **Security**.
