@@ -1,23 +1,24 @@
-## Description
+## Integrate Beacon into an Ansible Playbook
 
-Demonstrate BIG-IP app/infrastructure based on ansible inventory vars. The play book will pull Onboarding, Services, and Telemetry definitions from each host_var folder and deploy those to the BIG-IP. The playbook will also update Beacon dashboards based on the AS3 apps deloyed.
+This example demonstrates integrating Beacon into an Ansible Playbook.  The Playbook will:
+- instantiate a BIG-IP
+- provision the BIG-IP via definitions within the `host_var` folder
+- deploy AS3 appplications to the BIG-IP
+- update Beacon dashboards based on the AS3 apps deloyed
 
 #### Requirements
 
-- Python env with following dependencies (Intsall all py reqs with `pip install -r requirements.txt`)
-  - pip install 'ansible==2.8.4'
-  - pip install boto3
-  - pip install boto
-- Pre-made AWS sshkey, EIP, Security Group, VPC
+- Python env with the dependencies noted in `py_requirements.txt` (install all via `pip install -r py_requirements.txt`)
+- AWS SSH key, EIP, Security Group, VPC
 
 #### Output
 
-High level playbook flow:
+High level Playbook flow:
 
-- If current BIG-IP does not exist in AWS based on tags
+- If BIG-IP does not exist in AWS based on tags
   - Create EC2 BIG-IP
   - Move EIP in host_vars to new EC2
-  - Install Automation Toolchain (DO, AS3, TS)
+  - Install Automation Toolchain (DO, AS3, [TS](https://github.com/F5Networks/f5-telemetry-streaming))
   - Deploy DO declaration
 - After current/new box is online
   - Deploy AS3 Declaration
