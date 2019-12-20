@@ -12,5 +12,4 @@ build:
 .PHONY: release
 release: build
 	$(ECHO) zip function.zip main
-	$(ECHO) aws lambda update-function-code --function-name beacon-lambda-insight-example --zip-file fileb://function.zip --profile f5aas-overwatch-dev
-
+	$(ECHO) aws lambda update-function-code --function-name beacon-lambda-insight-example --zip-file fileb://function.zip
