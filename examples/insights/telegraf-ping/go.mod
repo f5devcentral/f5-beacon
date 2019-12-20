@@ -1,4 +1,4 @@
-module gitswarm.f5net.com/kahana/overwatch-lambda-alert
+module github.com/f5devcentral/examples/insights/telegraf-ping
 
 go 1.12
 
