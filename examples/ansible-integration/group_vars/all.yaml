@@ -1,0 +1,13 @@
+ssh_keyfile: "~/.aws/zcheng-aws-exp_key_pair.pem"
+waf_url: "https://raw.githubusercontent.com/alaari-f5/4-ansible/testb/as3/Common_linux-high__2018-7-17_18-53-21__.xml"
+ami: ami-0b1ddb58daf258014
+aws_ssh_key: zcheng-aws
+aws_instance_type: t2.large
+aws_sg: zcheng-sg
+aws_vpc_subnet: subnet-7d3b6c21
+git_repo: https://github.com/alaari-f5/f5_AT_deploy.git
+region: us-east-1
+rpms:
+  TS: https://github.com/F5Networks/f5-telemetry-streaming/raw/v1.5.0/dist/f5-telemetry-1.5.0-1.noarch.rpm
+  DO: https://github.com/F5Networks/f5-declarative-onboarding/raw/v1.6.0/dist/f5-declarative-onboarding-1.6.0-1.noarch.rpm
+  AS3: https://github.com/F5Networks/f5-appsvcs-extension/raw/v3.13.1/dist/latest/f5-appsvcs-3.13.1-1.noarch.rpm

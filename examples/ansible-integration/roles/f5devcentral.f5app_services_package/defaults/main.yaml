@@ -1,0 +1,11 @@
+---
+### Connection parameters
+provider:
+  server: localhost
+  server_port: 443
+  user: admin
+  password: secret
+  validate_certs: false
+  transport: rest
+
+f5app_services_package_state: present

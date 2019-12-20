@@ -1,0 +1,7 @@
+---
+- name: Install RPM Package on the BIG-IP
+  bigip_lx_package:
+    package: "{{ f5app_services_package_path }}"
+    provider: "{{ provider }}"
+    state: "{{ f5app_services_package_state }}"
+  delegate_to: localhost

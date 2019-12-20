@@ -1,0 +1,8 @@
+provider:
+  server: 34.207.106.26
+  server_port: 8443
+  user: admin
+  password: "{{ vpass }}"
+  validate_certs: false
+aws_tag: adhoc
+bcon_enabled: true

@@ -1,0 +1,3 @@
+---
+# vars file for f5_as3_beacon
+as3json: "{{ lookup('template','host_vars/' + inventory_hostname + '/apps.json') }}"

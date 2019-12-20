@@ -1,0 +1,23 @@
+---
+- name: Auth for Beacon
+  uri:
+    url: "https://api.cloudservices.f5.com/v1/svc-auth/login"
+    method: POST
+    body:
+      username: "{{ bcon_un }}"
+      password: "{{ bcon_pw }}"
+    body_format: json
+    validate_certs: no
+  delegate_to: localhost
+  register: bconauth
+
+- name: include setup-ts.yml
+  include_tasks: setup-ts.yml
+
+# TS Sends updates to Beacon every 60 seconds
+# - pause:
+#     seconds: 65
+#   when: as3_change |bool
+
+- name: include update-apps.yml
+  include_tasks: update-apps.yml

@@ -1,0 +1,54 @@
+---
+- name: Get Current Telemetry Tokens
+  uri:
+    url: "https://api.cloudservices.f5.com/beacon/v1/telemetry-token"
+    method: GET
+    headers:
+      Authorization: "Bearer {{ bconauth.json.access_token }}"
+      Content-Type: "application/json"
+    validate_certs: no
+  delegate_to: localhost
+  register: tokenlist
+
+- set_fact:
+    tel_token: "{{ item.accessToken | default()}}"
+  when: item.name == inventory_hostname
+  loop: "{{ tokenlist.json.tokens }}"
+
+- name: Create Token if one does not Exist
+  block:
+    - name: Create Beacon Telemetry Token
+      uri:
+        url: "https://api.cloudservices.f5.com/beacon/v1/telemetry-token"
+        method: POST
+        body:
+          name: "{{ inventory_hostname }}"
+          description: "token for ansible-bigip"
+        body_format: json
+        headers:
+          Authorization: "Bearer {{ bconauth.json.access_token }}"
+          Content-Type: "application/json"
+        validate_certs: no
+      delegate_to: localhost
+      register: new_token
+
+    - set_fact:
+        tel_token: "{{ new_token.json.accessToken }}"
+
+  when: tel_token is not defined
+
+- debug: var=tel_token
+
+- name: Push TS to BIG-IP
+  uri:
+    url: "https://{{ hostvars[inventory_hostname].provider.server  }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/telemetry/declare"
+    method: POST
+    user: admin
+    password: "{{ vpass}}"
+    body: "{{ lookup('template','host_vars/' + inventory_hostname + '/ts.json') }}"
+    status_code: 202, 200
+    timeout: 30
+    body_format: json
+    validate_certs: no
+  delegate_to: localhost
+  when: tel_token is defined

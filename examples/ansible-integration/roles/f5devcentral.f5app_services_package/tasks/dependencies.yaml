@@ -1,0 +1,12 @@
+---
+
+- name: Check if RPM exists on controller
+  local_action: command rpm --version warn=False
+  delegate_to: localhost
+  register: result
+  ignore_errors: true
+
+- name: RPM is not installed raise error
+  fail:
+    msg: RPM tool needs to be installed on Ansible Controller to use this Role.
+  when: result.rc != 0

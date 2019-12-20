@@ -1,0 +1,28 @@
+---
+
+- import_tasks: dependencies.yaml
+
+- name: Wait for BIG-IP to be available
+  bigip_wait:
+    timeout: 300
+    provider: "{{ provider }}"
+  delegate_to: localhost
+  register: status
+  until: status is success
+  retries: 10
+  delay: 6
+
+- import_tasks: download.yaml
+  when:
+    - f5app_services_package_state == "present"
+    - f5app_services_package_url is defined
+
+- import_tasks: install.yaml
+  when:
+    - f5app_services_package_state == "present"
+    - f5app_services_package_url is not defined
+
+- import_tasks: remove.yaml
+  when:
+    - f5app_services_package_state == "absent"
+    - f5app_services_package_path is defined
