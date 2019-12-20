@@ -4,7 +4,7 @@
 
 ## Introduction
 
-F5 Beacon empowers you to achieve full visibility across your application landscape, obtain app insights and business intelligence, and make fast, impactful, and better-informed decisions. With the Beacon Insight Engine, you can leverage pre-built insights or create your own custom insights. Beacon also integrates with many types of deployment across hybrid and multi-cloud environments—and provides a rich set of app stats in a simple, easy-to-consume SaaS model. 
+F5 Beacon empowers you to achieve full visibility across your application landscape, obtain app insights and business intelligence, and make fast, impactful, and better-informed decisions. With the Beacon Insight Engine, you can leverage pre-built insights or create your own custom insights. Beacon also integrates with many types of deployments across hybrid and multi-cloud environments—and provides a rich set of app stats in a simple, easy-to-consume SaaS model. 
 
 For more information, visit: https://f5.com/beacon
 
