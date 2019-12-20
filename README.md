@@ -10,7 +10,7 @@ For more information, visit: https://f5.com/beacon
 
 ## Purpose of this repository
 
-This repository includes resources, artifacts and examples that can be leveraged in use with F5 Beacon. 
+This repository includes resources, artifacts and examples that can be leveraged with F5 Beacon. 
 
 ## Documentation
 
