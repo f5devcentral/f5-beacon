@@ -1,5 +1,5 @@
 provider:
-  server: 34.207.106.26
+  server: 192.0.2.1
   server_port: 8443
   user: admin
   password: "{{ vpass }}"
