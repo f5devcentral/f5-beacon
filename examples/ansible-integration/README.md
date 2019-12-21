@@ -45,10 +45,10 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
   - bcon_password: `**Beacon Password**`
   - vpass: `**desired BIG-IP admin password**`
 - **ansible.cfg** by default looks up the vault password at `../vaults/.vault_pass`.  This is not required and the vault password may be added in a way which best fits your environment.
-- **ansible.cfg** update **log_path** var to point to correct place to log ansible output.
-- For each BIG-IP `host_var` update the following:
-  - **do.json** with desired Onboard settings (note AWS will reset the hostname based on dhclient).
-  - Update **apps.json** with desired AS3 Applications
+- update **log_path** in **ansible.cfg** to point to correct place to log Ansible output
+- for each BIG-IP `host_var` update the following:
+  - **do.json** with desired onboarding settings (note: AWS will reset the hostname based on dhclient)
+  - **apps.json** with desired AS3 applications
 - Update `group_vars/main.yaml` with AWS env information:
   ```
   ssh_keyfile: "~/.ssh/privatekey.pem"
