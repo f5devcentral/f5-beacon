@@ -25,7 +25,7 @@ High level Playbook flow:
   - Deploy [DO declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/do.json)
 - When the existing/new BIG-IP is online
   - Deploy [AS3 Declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/apps.json)
-  - If host_var **bcon_enabled** is set **true**, then run Beacon Ansible Role
+  - If host_var **bcon_enabled** is **true**, then run Beacon Ansible Role
     - If a Beacon token for the BIG-IP does not exist, create one
     - Send [TS declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/ts.json) to BIG-IP with the Beacon token
     - Wait ~60 seconds for TS poller to send data to Beacon
