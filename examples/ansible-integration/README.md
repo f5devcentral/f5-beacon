@@ -9,24 +9,27 @@ This example demonstrates integrating Beacon into an Ansible Playbook.  The Play
 #### Requirements
 
 - Python env with the dependencies noted in [py_requirements.txt](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/py_requirements.txt) (install all via `pip install -r py_requirements.txt`)
-- AWS SSH key, EIP, Security Group, VPC
+- AWS SSH key, Security Group, VPC
+  - these are specified in [all.yaml](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/group_vars/all.yaml)
+- AWS EIP
+  - specified in [vars.yaml](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/vars.yaml)
 
 #### Output
 
 High level Playbook flow:
 
 - If BIG-IP does not exist in AWS based on tags
-  - Create EC2 BIG-IP
-  - Move EIP in host_vars to new EC2
+  - Create EC2 BIG-IP instance
+  - Associate the EIP in host_vars to the new EC2 instance
   - Install Automation Toolchain ([DO](https://github.com/F5Networks/f5-declarative-onboarding), [AS3](https://github.com/F5Networks/f5-appsvcs-extension), [TS](https://github.com/F5Networks/f5-telemetry-streaming))
   - Deploy [DO declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/do.json)
-- After current/new box is online
-  - Deploy AS3 Declaration
-  - Run Beacon Ansible Role (when host_var \*bcon_enabled** is set to **true\*\*)
-    - If Beacon Token for current BIG-IP does not exist, create one
-    - Send TS declaration to BIG-IP with updated Token
-    - Wait ~60 seconds for TS poller to send AS3 apps to Beacon
-    - Compare AS3 declaration and Beacon Apps/Components and true-up (apps defined based on constats class in AS3)
+- When the existing/new BIG-IP is online
+  - Deploy [AS3 Declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/apps.json)
+  - If host_var **bcon_enabled** is set **true**, then run Beacon Ansible Role
+    - If a Beacon token for the BIG-IP does not exist, create one
+    - Send [TS declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/ts.json) to BIG-IP with the Beacon token
+    - Wait ~60 seconds for TS poller to send data to Beacon
+    - Compare AS3 declaration and Beacon Applications/Components and true-up (apps defined based on constants class in AS3)
 
 #### Setup
 
