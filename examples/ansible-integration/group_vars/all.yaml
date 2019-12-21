@@ -4,7 +4,7 @@ aws_ssh_key: zcheng-aws
 aws_instance_type: t2.large
 aws_sg: zcheng-sg
 aws_vpc_subnet: subnet-7d3b6c21
-git_repo: https://github.com/alaari-f5/f5_AT_deploy.git
+git_repo: https://github.com/f5devcentral/f5-beacon.git
 region: us-east-1
 rpms:
   TS: https://github.com/F5Networks/f5-telemetry-streaming/raw/v1.5.0/dist/f5-telemetry-1.5.0-1.noarch.rpm
