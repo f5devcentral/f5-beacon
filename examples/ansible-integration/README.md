@@ -19,7 +19,7 @@ High level Playbook flow:
   - Create EC2 BIG-IP
   - Move EIP in host_vars to new EC2
   - Install Automation Toolchain ([DO](https://github.com/F5Networks/f5-declarative-onboarding), [AS3](https://github.com/F5Networks/f5-appsvcs-extension), [TS](https://github.com/F5Networks/f5-telemetry-streaming))
-  - Deploy DO declaration
+  - Deploy [DO declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/do.json)
 - After current/new box is online
   - Deploy AS3 Declaration
   - Run Beacon Ansible Role (when host_var \*bcon_enabled** is set to **true\*\*)
