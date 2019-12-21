@@ -1,5 +1,4 @@
 ssh_keyfile: "~/.aws/zcheng-aws-exp_key_pair.pem"
-waf_url: "https://raw.githubusercontent.com/alaari-f5/4-ansible/testb/as3/Common_linux-high__2018-7-17_18-53-21__.xml"
 ami: ami-0b1ddb58daf258014
 aws_ssh_key: zcheng-aws
 aws_instance_type: t2.large
