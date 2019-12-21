@@ -10,7 +10,7 @@ This example demonstrates integrating Beacon into an Ansible Playbook.  The Play
 
 - Python env with the dependencies noted in [py_requirements.txt](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/py_requirements.txt) (install all via `pip install -r py_requirements.txt`)
 - AWS SSH key, Security Group, VPC
-  - these are specified in [all.yaml](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/group_vars/all.yaml)
+  - specified in [all.yaml](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/group_vars/all.yaml)
 - AWS EIP
   - specified in [vars.yaml](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/vars.yaml)
 
