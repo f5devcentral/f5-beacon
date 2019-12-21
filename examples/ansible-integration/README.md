@@ -1,6 +1,6 @@
-## Integrate Beacon into an Ansible Playbook
+## Integrate Beacon into an Ansible playbook
 
-This example demonstrates integrating Beacon into an Ansible Playbook.  The Playbook will:
+This example demonstrates integrating Beacon into an Ansible playbook.  The playbook will:
 - instantiate a BIG-IP
 - provision the BIG-IP via definitions within the [host_var](https://github.com/f5devcentral/f5-beacon/tree/master/examples/ansible-integration/host_vars) folder
 - deploy [AS3 appplications](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/apps.json) to the BIG-IP
@@ -16,7 +16,7 @@ This example demonstrates integrating Beacon into an Ansible Playbook.  The Play
 
 #### Output
 
-High level Playbook flow:
+High level playbook flow:
 
 - If BIG-IP does not exist in AWS based on tags
   - Create EC2 BIG-IP instance
@@ -33,18 +33,18 @@ High level Playbook flow:
 
 #### Setup
 
-The ansible playbook has a hosts file with a group called **bigips**. The host listed under this group should have a corresponding folder under `host_vars` which holds the definitions of the BIG-IP.
+The Ansible playbook has a hosts file with a group called **bigips**.  The host listed under this group should have a corresponding folder under `host_vars` which holds the definition for the BIG-IP.
 
-- Update the git_repo var in `group_vars/all.yaml` to point to your customized/forked version. It will update from this as source-of-truth on every run and overwrite local changes. Make sure the host running this playbook has access to pull from this repo.
+- Update the git_repo var in `group_vars/all.yaml` to point to your customized/forked version.  It will update from the specified repo as the source-of-truth on every run and overwrite local changes.  Make sure the host running this playbook has access to pull from the specified repo.
 - Update the python interpreter inside the **hosts** file to the appropriate location.
-  - ie: `localhost ansible_python_interpreter=/sc/venvs/np/bin/python`
-- Add vault file `../vaults/creds.yaml` with the following secrets and encrypt with your password
+  - e.g.: `localhost ansible_python_interpreter=/sc/venvs/np/bin/python`
+- Add vault file `../vaults/creds.yaml` with the following secrets:
   - aws_access_key: `****`
   - aws_secret_key: `****`
-  - bcon_un: `**Beacon Username**`
-  - bcon_pw: `**Beacon Password**`
-  - vpass: `**Desired BIG-IP admin password**`
-- **ansible.cfg** by default looks up the vault password at `../vaults/.vault_pass`. This is not required and the vault password may be added in a way which best fits your environment.
+  - bcon_username: `**Beacon Username**`
+  - bcon_password: `**Beacon Password**`
+  - vpass: `**desired BIG-IP admin password**`
+- **ansible.cfg** by default looks up the vault password at `../vaults/.vault_pass`.  This is not required and the vault password may be added in a way which best fits your environment.
 - **ansible.cfg** update **log_path** var to point to correct place to log ansible output.
 - For each BIG-IP `host_var` update the following:
   - **do.json** with desired Onboard settings (note AWS will reset the hostname based on dhclient).
