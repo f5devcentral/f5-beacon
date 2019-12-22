@@ -62,8 +62,8 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
 
 #### Beacon Setup
 
-- Beacon role is only used when **bcon_enabled: true** is set within host_vars
-- Beacon apps to be updated by the playbook should be defined by the var `bcon_apps`. By default this is set within `group_vars/all.yaml` similar to the below example.
+- Beacon role is only used when **bcon_enabled** is **true** within host_vars
+- For Beacon apps to be updated, they must be defined in `bcon_apps` within `group_vars/all.yaml` similar to the below example.
   ```
   bcon_apps:
       App1:
@@ -74,7 +74,7 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
           owner: The Avengers
           region: US East
   ```
-- Each AS3 app must have constants set similar to below referencing which Beacon app to associate with them.
+- Each AS3 app must have constants set similar to below referencing the associated Beacon app(s).
   ```
   "App1": {
   "class": "Application",
@@ -85,15 +85,15 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
       }
   },
   ```
-- For the playbook to update an App within the Beacon portal, the App must be referenced in the **bcon_apps** var as well as the **AS3** declaration. If it is not referenced in **AS3**, it will be treated as an App with no dependencies (no-op). If it is not referenced in **bcon_apps** it will assume you are not wanting ansible to update that App.
+- For the playbook to update an app within Beacon, the app must be referenced in both **bcon_apps** and the **AS3** declaration.  If it is not referenced in the **AS3** declaration, it will be treated as an app with no Beacon dependencies (no-op).  If it is not referenced in **bcon_apps**, it will assume you are not wanting Ansible to update that app.
 
 ### Assumptions
 
-- App Names in Beacon are unique. Ansible is not currently tracking App IDs, it references based on name.
-- Ansible will not manipulate Beacon App dependencies that do not belong to the current BIG-IP the playbook is running against.
-- If an Beacon Component is already a dependency for an App, it will not be added a second time.
-- There is only 1 health source per Component/App Dependency
-- If an OverwBeaconatch App defined in Ansible has no dependencies left, it will remove the App in Beacon
+- App names in Beacon are unique.  Ansible is not currently tracking app IDs -- apps are referenced by name.
+- Ansible will not manipulate Beacon app dependencies that do not belong to the BIG-IP the playbook is running against.
+- If a Beacon component is already a dependency for an app, it will not be added a second time.
+- There is only one health source per component/app dependency.
+- If a Beacon app defined in Ansible has no dependencies left, it will remove the app in Beacon.
 
 ## Run the Playbook
 
