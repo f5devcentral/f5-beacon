@@ -49,7 +49,7 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
 - for each BIG-IP `host_var` update the following:
   - **do.json** with desired onboarding settings (note: AWS will reset the hostname based on dhclient)
   - **apps.json** with desired AS3 applications
-- Update `group_vars/main.yaml` with AWS env information:
+- Update `group_vars/all.yaml` with AWS env information:
   ```
   ssh_keyfile: "~/.ssh/privatekey.pem"
   ami: ami-07b978ff1e31c60f9
@@ -63,7 +63,7 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
 #### Beacon Setup
 
 - Beacon role is only used when **bcon_enabled: true** is set within host_vars
-- Beacon apps to be updated by the playbook should be defined by the var `bcon_apps`. By default this is set within `group_vars/main.yaml` similar to the below example.
+- Beacon apps to be updated by the playbook should be defined by the var `bcon_apps`. By default this is set within `group_vars/all.yaml` similar to the below example.
   ```
   bcon_apps:
       App1:
