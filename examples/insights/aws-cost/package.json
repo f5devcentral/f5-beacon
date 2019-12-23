@@ -1,0 +1,26 @@
+{
+  "name": "beacon-cost-insight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitswarm.f5net.com:shsharma/beacon-cost-insight.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.594.0",
+    "beacon-sdk-node": "git+ssh://git@gitswarm.f5net.com:f5aas/beacon-sdk-node",
+    "dateformat": "^3.0.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
+  },
+  "devDependencies": {
+    "serverless-offline": "^5.12.1"
+  }
+}
