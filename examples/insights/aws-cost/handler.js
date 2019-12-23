@@ -27,7 +27,7 @@ module.exports.costInsight = async event => {
         return new Promise((resolve) => {
             resolve(
                 rp.post({
-                    url: 'https://api.dev.f5aas.com/v1/svc-auth/login',
+                    url: 'https://api.cloudservices.f5.com/v1/svc-auth/login',
                     body: {username: Username, password: Password},
                     json: true
                 }));
@@ -39,7 +39,7 @@ module.exports.costInsight = async event => {
             resolve(
                 rp.defaults({
                     auth: {bearer: AccessToken},
-                    baseUrl: "https://api.dev.f5aas.com/beacon/v1/",
+                    baseUrl: "https://api.cloudservices.f5.com/beacon/v1/",
                     json: true
                 })
             );
