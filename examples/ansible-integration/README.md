@@ -2,7 +2,7 @@
 
 This example demonstrates integrating Beacon into an Ansible playbook.  The playbook will:
 - instantiate a BIG-IP
-- provision the BIG-IP via definitions within the [host_var](https://github.com/f5devcentral/f5-beacon/tree/master/examples/ansible-integration/host_vars) folder
+- provision the BIG-IP via definitions within the [host_var](host_vars) folder
 - deploy [AS3 appplications](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/apps.json) to the BIG-IP
 - update Beacon dashboards based on the AS3 apps deloyed
 
