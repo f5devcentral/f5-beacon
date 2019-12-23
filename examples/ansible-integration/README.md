@@ -22,12 +22,12 @@ High level playbook flow:
   - Create EC2 BIG-IP instance
   - Associate the EIP in host_vars to the new EC2 instance
   - Install Automation Toolchain ([DO](https://github.com/F5Networks/f5-declarative-onboarding), [AS3](https://github.com/F5Networks/f5-appsvcs-extension), [TS](https://github.com/F5Networks/f5-telemetry-streaming))
-  - Deploy [DO declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/do.json)
+  - Deploy [DO declaration](host_vars/localhost/do.json)
 - When the existing/new BIG-IP is online
-  - Deploy [AS3 Declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/apps.json)
+  - Deploy [AS3 Declaration](host_vars/localhost/apps.json)
   - If host_var **bcon_enabled** is **true**, then run Beacon Ansible Role
     - If a Beacon token for the BIG-IP does not exist, create one
-    - Send [TS declaration](https://github.com/f5devcentral/f5-beacon/blob/master/examples/ansible-integration/host_vars/localhost/ts.json) to BIG-IP with the Beacon token
+    - Send [TS declaration](host_vars/localhost/ts.json) to BIG-IP with the Beacon token
     - Wait ~60 seconds for TS poller to send data to Beacon
     - Compare AS3 declaration and Beacon Applications/Components and true-up (apps defined based on constants class in AS3)
 
