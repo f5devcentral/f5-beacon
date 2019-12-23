@@ -4,7 +4,7 @@ This example demonstrates one way in which Beacon can be integrated with an Ansi
 - instantiate a BIG-IP
 - provision the BIG-IP via definitions within the [host_vars](host_vars) folder
 - deploy [AS3 appplications](host_vars/localhost/apps.json) to the BIG-IP
-- update Beacon dashboards based on the AS3 apps deloyed
+- update Beacon apps based on the AS3 apps deloyed
 Though the playbook creates a BIG-IP, this example is focused on Beacon integration.
 
 #### Requirements
