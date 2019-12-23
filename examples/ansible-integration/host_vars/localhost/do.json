@@ -1,7 +1,7 @@
 {
     "schemaVersion": "1.6.0",
     "class": "Device",
-	"async": true,
+    "async": true,
     "Common": {
         "class": "Tenant",
         "hostname": "{{ env_hostname }}",
@@ -14,8 +14,8 @@
             "timezone": "UTC"
         },
         "myProvisioning": {
-        	"class": "Provision",
-        	"ltm": "nominal",
+            "class": "Provision",
+            "ltm": "nominal",
             "asm": "nominal"
         },
         "testUser": {
@@ -30,10 +30,10 @@
             }
         },
         "dbvars": {
-        	"class": "DbVariables",
-        	"ui.advisory.enabled": true,
-        	"ui.advisory.color": "green",
-        	"ui.advisory.text": "/Common/hostname"
+            "class": "DbVariables",
+            "ui.advisory.enabled": true,
+            "ui.advisory.color": "green",
+            "ui.advisory.text": "/Common/hostname"
         }
     }
 }
