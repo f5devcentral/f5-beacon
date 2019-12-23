@@ -1,6 +1,6 @@
 ## Integrate Beacon into an Ansible playbook
 
-This example demonstrates integrating Beacon into an Ansible playbook.  The playbook will:
+This example demonstrates one way in which Beacon can be integrated with an Ansible playbook.  The playbook will:
 - instantiate a BIG-IP
 - provision the BIG-IP via definitions within the [host_vars](host_vars) folder
 - deploy [AS3 appplications](host_vars/localhost/apps.json) to the BIG-IP
