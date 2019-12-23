@@ -72,25 +72,23 @@ module.exports.costInsight = async event => {
 
     function createInsight(CostArray) {
         var MarkdownContent = "| Date | Amount | Unit |\n| :--- | :--- | :---- |\n";
-        return new Promise((resolve) => {
-            var totalCost = 0;
-            const unit = CostArray.length > 0 ? CostArray[0].Total.AmortizedCost.Unit : 'USD';
-            CostArray.ResultsByTime.forEach(result => {
-                totalCost += Number(result.Total.AmortizedCost.Amount);
-                MarkdownContent = MarkdownContent + `| ${result.TimePeriod.Start} | ${Number(result.Total.AmortizedCost.Amount).toFixed(2).toString()} | ${result.Total.AmortizedCost.Unit} |\n`;
+        var totalCost = 0;
+        const unit = CostArray.length > 0 ? CostArray[0].Total.AmortizedCost.Unit : 'USD';
+        CostArray.ResultsByTime.forEach(result => {
+            totalCost += Number(result.Total.AmortizedCost.Amount);
+            MarkdownContent = MarkdownContent + `| ${result.TimePeriod.Start} | ${Number(result.Total.AmortizedCost.Amount).toFixed(2).toString()} | ${result.Total.AmortizedCost.Unit} |\n`;
 
-            });
-            totalCost = totalCost.toFixed(2);
-            MarkdownContent = `\n ##### Total AWS Cost: ${totalCost} ${unit} \n` + MarkdownContent;
-            const created_insight = {
-                title: "AWS Cost Insight",
-                description: `AWS cost incurred over the last 12 months along with the monthly distribution of the cost can be seen below.`,
-                markdownContent: MarkdownContent,
-                category: "INS_CAT_COST",
-                severity: "INS_SEV_INFORMATIONAL"
-            };
-            resolve(created_insight);
         });
+        totalCost = totalCost.toFixed(2);
+        MarkdownContent = `\n ##### Total AWS Cost: ${totalCost} ${unit} \n` + MarkdownContent;
+        const created_insight = {
+            title: "AWS Cost Insight",
+            description: `AWS cost incurred over the last 12 months along with the monthly distribution of the cost can be seen below.`,
+            markdownContent: MarkdownContent,
+            category: "INS_CAT_COST",
+            severity: "INS_SEV_INFORMATIONAL"
+        };
+        return created_insight;
     }
 
     function publishCostInsight(createdInsight, accountid) {
@@ -128,7 +126,7 @@ module.exports.costInsight = async event => {
             self.rpWithAuth = await loginF5Portal(tokenRes.access_token);
             console.log('Login Successful.');
             const costRes = await getCost(StartDate, EndDate);
-            const createdInsight = await createInsight(costRes);
+            const createdInsight = createInsight(costRes);
             await publishCostInsight(createdInsight, jsonData.accountid);
             console.log('Cost Insight created and published.');
         } catch (e) {
