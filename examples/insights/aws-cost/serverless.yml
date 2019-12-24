@@ -13,7 +13,7 @@ provider:
   iamRoleStatements:
     - Effect: "Allow"
       Action:
-        - "ce:*"
+        - "ce:GetCostAndUsage"
       Resource:
         - "*"
 
