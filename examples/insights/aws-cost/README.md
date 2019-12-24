@@ -10,13 +10,13 @@ These insights are categorized into Cost, Operations or Security. AWS Cost Insig
 ### Giving Access to Billing Information
 
 Access to AWS Billing Information has been given by setting the IAM Role Permission in file `serverless.yml`.  
-By default **Full Access** has been provided to AWS Cost Explorer. You can update the `iamRoleStatements` in `serverless.yml` file to change permissions.
+By default access has been provided to **ce:GetCostAndUsage** Action of AWS Cost Explorer. You can update the `iamRoleStatements` in `serverless.yml` file to change permissions.
 
 ```
 iamRoleStatements:
     - Effect: "Allow"
       Action:
-        - "ce:*"
+        - "ce:GetCostAndUsage"
       Resource:
         - "*"
 ```
