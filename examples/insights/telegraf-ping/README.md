@@ -6,7 +6,7 @@ Please ensure that you have configured Telegraf to send metrics to Beacon before
 
 Add the following code block in the telegraf configuration file which you have modified using the instructions mentioned above.
 
-```json
+```bash
 [[inputs.ping]]
     urls = ["google.com"]
 ```
