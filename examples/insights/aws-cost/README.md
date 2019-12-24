@@ -3,8 +3,6 @@
 F5 Beacon provides a centralized location(Insights View) to get insightful information about an application's ecosystem.
 These insights are categorized into Cost, Operations or Security. AWS Cost Insight is one of the examples which fall under the Cost Category and using the lambda can directly be imported into F5 Beacon's Insights View.
 
-![](images/CostInsight_F5Portal.png)
-
 ## Publish AWS Cost Insights using Beacon Cost Insight lambda example
 
 ### Giving Access to Billing Information
