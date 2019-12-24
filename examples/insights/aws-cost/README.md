@@ -20,6 +20,13 @@ iamRoleStatements:
       Resource:
         - "*"
 ```
+**SECURITY WARNING** <br/>
+It is your responsibility to:
+* Secure and restrict access to the IAM role and your overall AWS deployment.
+* For more details on IAM permission policies for AWS Cost Explorer Service, visit:
+    * https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awscostexplorerservice.html#awscostexplorerservice-resources-for-iam-policies
+* Remove any sensitive data **PRIOR** to publishing the insight
+
 ### Cost Insight
 
 In this section, we will detail how to utilize the F5 Beacon Insights API to build a Cost Insight using AWS.
