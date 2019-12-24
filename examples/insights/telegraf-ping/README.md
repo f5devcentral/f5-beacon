@@ -1,3 +1,17 @@
+**Prerequisites before publishing insights to Beacon**
+
+Please ensure that you have configured Telegraf to send metrics to Beacon before using this example. Please follow all the instructions mentioned in the Telegraf popup under Integrations tab of Source Management.
+
+![](images/F5CS_Beacon.Service-PrerequisitePing.png)
+
+Add the following code block in the telegraf configuration file which you have modified using the instructions mentioned above.
+
+```json
+[[inputs.ping]]
+    urls = ["google.com"]
+```
+Now you can use the following lambda example to publish custom Beacon insights.
+
 **Publish Custom Beacon Insights using AWS Lambda**
 
 The **Insights View** page within F5 Beacon is a centralized location to get insightful information about your application ecosystem.
