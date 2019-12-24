@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.594.0",
-    "beacon-sdk-node": "git+ssh://git@gitswarm.f5net.com:f5aas/beacon-sdk-node",
     "dateformat": "^3.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.5"
