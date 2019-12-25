@@ -1,5 +1,5 @@
 - name: boot_aws
-  hosts: localhost
+  hosts: zcheng-aws-bigip
   connection: local
   gather_facts: false
 
@@ -13,7 +13,7 @@
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"
         filters:
-          "tag:ansible": adhoc
+          "tag:ansible": "{{ aws_tag}}"
           instance-state-name: ["running"]
       register: inst
       delegate_to: localhost
@@ -35,7 +35,7 @@
             wait: true
             group: "{{ aws_sg }}"
             instance_tags:
-              ansible: adhoc
+              ansible: "{{ aws_tag }}"
               Name: "{{ inventory_hostname }}"
             vpc_subnet_id: "{{ aws_vpc_subnet }}"
             region: "{{ region }}"
@@ -72,17 +72,58 @@
             commands: modify auth user {{ hostvars[inventory_hostname].provider.user }} password {{ vpass }}
           delegate_to: localhost
 
+        - name: Wait for API to be up
+          bigip_wait:
+            timeout: 150
+            provider: "{{ provider }}"
+          delegate_to: localhost
+
+        - name: Download and Install AT RPMs
+          include_role:
+            name: f5devcentral.f5app_services_package
+          vars:
+            f5app_services_package_url: "{{ rpms[item] }}"
+            f5app_services_package_path: "{{ playbook_dir }}/files/{{ rpms[item].split('/')[-1] }}"
+          loop: "{{ rpms.keys() }}"
+          loop_control:
+            pause: 6
+
+        - pause:
+            seconds: 5
+
+        - name: Push DO
+          uri:
+            url: "https://{{ hostvars[inventory_hostname].provider.server  }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/declarative-onboarding"
+            method: POST
+            user: admin
+            password: "{{ vpass}}"
+            body: "{{ lookup('template','host_vars/' + inventory_hostname + '/do.json') }}"
+            status_code: 202
+            timeout: 30
+            body_format: json
+            validate_certs: no
+          delegate_to: localhost
+
+        - name: Wait for DO to finish
+          uri:
+            url: "https://{{ hostvars[inventory_hostname].provider.server  }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/declarative-onboarding"
+            user: admin
+            password: "{{ vpass }}"
+            status_code: 202, 200
+            validate_certs: no
+          register: dostatus
+          delegate_to: localhost
+          ignore_errors: true
+          until: dostatus.status == 200
+          retries: 30
+          delay: 10
+
         - pause:
             seconds: 10
 
       when: inst.instances|length == 0
 
-    - name: Wait for API to be up
-      bigip_wait:
-        timeout: 150
-        provider: "{{ provider }}"
-      delegate_to: localhost
-
+      # End Onboard new BIG-IP
     - pause:
         seconds: 5
 

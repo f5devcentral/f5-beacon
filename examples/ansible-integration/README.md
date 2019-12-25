@@ -1,11 +1,12 @@
 ## Integrate Beacon into an Ansible playbook
 
-This example demonstrates one way in which Beacon can be integrated with an Ansible playbook.  The playbook will:
+This example demonstrates one way in which Beacon can be integrated with an Ansible playbook. The playbook will:
+
 - instantiate a BIG-IP
 - provision the BIG-IP via definitions within the [host_vars](host_vars) folder
 - deploy [AS3 appplications](host_vars/localhost/apps.json) to the BIG-IP
 - update Beacon apps based on the AS3 apps deloyed
-Though the playbook creates a BIG-IP, this example is focused on Beacon integration.
+  Though the playbook creates a BIG-IP, this example is focused on Beacon integration.
 
 #### Requirements
 
@@ -34,9 +35,9 @@ High level playbook flow:
 
 #### Setup
 
-The Ansible playbook has a hosts file with a group called **bigips**.  The host listed under this group should have a corresponding folder under `host_vars` which holds the definition for the BIG-IP.
+The Ansible playbook has a hosts file with a group called **bigips**. The host listed under this group should have a corresponding folder under `host_vars` which holds the definition for the BIG-IP.
 
-- Update the git_repo var in `group_vars/all.yaml` to point to your customized/forked version.  It will update from the specified repo as the source-of-truth on every run and overwrite local changes.  Make sure the host running this playbook has access to pull from the specified repo.
+- Update the git_repo var in `group_vars/all.yaml` to point to your customized/forked version. It will update from the specified repo as the source-of-truth on every run and overwrite local changes. Make sure the host running this playbook has access to pull from the specified repo.
 - Update the python interpreter inside the **hosts** file to the appropriate location.
   - e.g.: `localhost ansible_python_interpreter=/sc/venvs/np/bin/python`
 - Add vault file `../vaults/creds.yaml` with the following secrets:
@@ -45,7 +46,7 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
   - bcon_username: `**Beacon Username**`
   - bcon_password: `**Beacon Password**`
   - vpass: `**desired BIG-IP admin password**`
-- by default, **ansible.cfg** looks up the vault password at `../vaults/.vault_pass`.  This is not required and the vault password may be added in a way which best fits your environment.
+- by default, **ansible.cfg** looks up the vault password at `../vaults/.vault_pass`. This is not required and the vault password may be added in a way which best fits your environment.
 - update **log_path** in **ansible.cfg** to point to correct place to log Ansible output
 - for each BIG-IP `host_var` update the following:
   - **do.json** with desired onboarding settings (note: AWS will reset the hostname based on dhclient)
@@ -86,11 +87,11 @@ The Ansible playbook has a hosts file with a group called **bigips**.  The host 
       }
   },
   ```
-- For the playbook to update an app within Beacon, the app must be referenced in both **bcon_apps** and the **AS3** declaration.  If it is not referenced in the **AS3** declaration, it will be treated as an app with no Beacon dependencies (no-op).  If it is not referenced in **bcon_apps**, it will assume you are not wanting Ansible to update that app.
+- For the playbook to update an app within Beacon, the app must be referenced in both **bcon_apps** and the **AS3** declaration. If it is not referenced in the **AS3** declaration, it will be treated as an app with no Beacon dependencies (no-op). If it is not referenced in **bcon_apps**, it will assume you are not wanting Ansible to update that app.
 
 ### Assumptions
 
-- App names in Beacon are unique.  Ansible is not currently tracking app IDs -- apps are referenced by name.
+- App names in Beacon are unique. Ansible is not currently tracking app IDs -- apps are referenced by name.
 - Ansible will not manipulate Beacon app dependencies that do not belong to the BIG-IP the playbook is running against.
 - If a Beacon component is already a dependency for an app, it will not be added a second time.
 - There is only one health source per component/app dependency.

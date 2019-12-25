@@ -1,5 +1,4 @@
 ---
-
 - import_tasks: dependencies.yaml
 
 - name: Wait for BIG-IP to be available

@@ -30,8 +30,6 @@ def as3parse(d):
       for a, av in tv.iteritems():
         if 'class' in av and av['class'] == 'Application':
           app_dependency = av['constants']['beacon']['app_dependency']
-          #print('inside as3 parse...')
-          #print(app_dependency)
           for s, sv in av.iteritems():
             if 'class' in sv and 'Service_' in sv['class']:
               for bconapp in app_dependency:
@@ -62,19 +60,9 @@ def app_update(l):
 
 # ### Gather data from functions above
 comp_id_dict(bcon_comp)
-#print("com_id_dict")
-#print(compdict)
 reverse_compdict = {v: k for k, v in compdict.items()}
-#print("reverse_compdict")
-#print(reverse_compdict)
 app_update(bcon_apps)
-#print('app_update')
-#print(appdict)
-#print("Testing...")
-#print(as3['declaration'])
 as3parse(as3['declaration'])
-#print('after as3parse')
-#print(appdict)
 
 ### Prevents adding Components that are already in the Beacon app
 ### Removes current Components in Beacon apps that are no longer in AS3
@@ -94,7 +82,6 @@ for k, v in appdict.iteritems():
           appdict[k]['body']['dependencies'] = []
   for dep in remove_dep:
     appdict[k]['body']['dependencies'].remove(dep)
-#print(appdict)
 
 #Update dependencies in JSON
 for app, v in appdict.iteritems():
@@ -106,20 +93,11 @@ for app, v in appdict.iteritems():
         appdict[app]['body']['dependencies'] = []
       appdict[app]['body']['dependencies'].append({"name": str(reverse_compdict[dep]),"healthSourceSettings": {"metrics":[{ "measurementName":"BeaconHealth","tags":{"name":str(reverse_compdict[dep]),"source":env_hostname}}]}})
 
-#print appdict
-
 def transform_body(body, app):
   new_body = {"name": app}
   for key in body:
     if key != body[key]:
       new_body[key] = body[key]
-
-  #new_body['description'] = body['description']
-  #if body['healthSourceSettings']:
-  #  new_body['healthSourceSettings'] = body['healthSourceSettings']
-  #new_body['labels'] = body['labels']
-  #new_body['name'] = body['name']
-  #new_body['dependencies'] = body['dependencies']
   return new_body
 
 for app in appdict:
