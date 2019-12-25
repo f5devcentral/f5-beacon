@@ -1,6 +1,6 @@
 **Prerequisites**
 
-Configure Telegraf to send metrics to Beacon before using this example.  For help, login to Beacon and navigate to Source Management > Integrations >  Telegraf.
+Configure Telegraf to send metrics to Beacon before using this example.  For help, login to Beacon and navigate to Source Configuration > Integrations > Telegraf.
 
 ![](images/F5CS_Beacon.Service-PrerequisitePing.png)
 
