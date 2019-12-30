@@ -6,7 +6,6 @@
     headers:
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
-    validate_certs: no
   delegate_to: localhost
   register: tokenlist
 
@@ -28,7 +27,6 @@
         headers:
           Authorization: "Bearer {{ bconauth.json.access_token }}"
           Content-Type: "application/json"
-        validate_certs: no
       delegate_to: localhost
       register: new_token
 
