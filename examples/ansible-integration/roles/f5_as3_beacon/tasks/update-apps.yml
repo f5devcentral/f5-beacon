@@ -1,5 +1,5 @@
 ---
-# Retrieve Existing apps from Beacon defined within Ansible
+# Retrieve existing apps from Beacon defined within Ansible
 - name: Get current Beacon app IDs by name
   uri:
     url: "https://api.cloudservices.f5.com/beacon/v1/applications?filter=name={{ item.key }}"
@@ -8,18 +8,15 @@
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
     body_format: json
-    validate_certs: no
   delegate_to: localhost
   register: all_bcon_apps
   with_dict: "{{ bcon_apps }}"
 
-# - debug: var=all_bcon_apps
-
-# Empty List for Beacon APP_IDS to retrieve
+# Empty list for Beacon app IDs to retrieve
 - set_fact:
     appids: []
 
-- name: Update List of APP IDs
+- name: Update list of app IDs
   set_fact:
     appids: "{{ appids + [ item.json.apps[0].id ] }}"
   loop: "{{ all_bcon_apps.results }}"
@@ -35,14 +32,13 @@
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
     body_format: json
-    validate_certs: no
   delegate_to: localhost
   register: complete_bcon_apps
   loop: "{{ appids }}"
 
 - debug: var=complete_bcon_apps
 
-- name: Get current Beacon Components
+- name: Get current Beacon components
   uri:
     url: "https://api.cloudservices.f5.com/beacon/v1/components-health?filter=sourceName={{ env_hostname }}"
     method: GET
@@ -50,12 +46,9 @@
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
     body_format: json
-    validate_certs: no
   delegate_to: localhost
   register: all_bcon_components
 
-#- debug: var=as3json
-#- debug: var=complete_bcon_apps.results
 - debug: var=all_bcon_components.json.componentsHealth
 
 # Parse AS3/Beacon data for appropriate actions
@@ -65,8 +58,8 @@
 
 - debug: var=as3_apps.stdout
 
-# Update Existing Apps using declare
-- name: Deploy bcon Apps
+# Update existing apps using declare
+- name: Deploy Beacon apps
   uri:
     url: "https://api.cloudservices.f5.com/beacon/v1/declare"
     method: POST
@@ -75,7 +68,6 @@
     headers:
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
-    validate_certs: no
   delegate_to: localhost
   register: app_declare_deploy
   with_dict: "{{ as3_apps.stdout }}"
@@ -83,7 +75,7 @@
 
 - debug: var=app_declare_deploy
 
-- name: Wait for Apps deploy to finish
+- name: Wait for apps deploy to finish
   uri:
     url: "{{app_declare_deploy.results[0].json.taskReference}}"
     method: GET
@@ -91,7 +83,6 @@
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
     status_code: 200
-    validate_certs: no
   register: app_deploy_task
   delegate_to: localhost
   ignore_errors: true
@@ -103,7 +94,7 @@
 
 - debug: var=app_deploy_task
 
-# Update Existing Apps using declare
+# Update existing apps using declare
 - name: Remove bcon Apps
   uri:
     url: "https://api.cloudservices.f5.com/beacon/v1/declare"
@@ -113,13 +104,12 @@
     headers:
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
-    validate_certs: no
   delegate_to: localhost
   register: app_declare_remove
   with_dict: "{{ as3_apps.stdout }}"
   when: item.value.action == "remove" and item.value.declaration != []
 
-- name: Wait for Apps remove to finish
+- name: Wait for apps remove to finish
   uri:
     url: "{{app_declare_remove.results[0].json.taskReference}}"
     method: GET
@@ -127,7 +117,6 @@
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
     status_code: 200
-    validate_certs: no
   register: app_remove_task
   delegate_to: localhost
   with_dict: "{{ as3_apps.stdout }}"
