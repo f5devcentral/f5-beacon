@@ -1,5 +1,5 @@
 ---
-- name: Get Current Telemetry Tokens
+- name: Get current Beacon tokens
   uri:
     url: "https://api.cloudservices.f5.com/beacon/v1/telemetry-token"
     method: GET
@@ -15,7 +15,7 @@
   when: item.name == inventory_hostname
   loop: "{{ tokenlist.json.tokens }}"
 
-- name: Create Token if one does not Exist
+- name: Create token if one does not exist
   block:
     - name: Create Beacon Telemetry Token
       uri:
@@ -39,9 +39,9 @@
 
 - debug: var=tel_token
 
-- name: Push TS to BIG-IP
+- name: Push TS declaration to BIG-IP
   uri:
-    url: "https://{{ hostvars[inventory_hostname].provider.server  }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/telemetry/declare"
+    url: "https://{{ hostvars[inventory_hostname].provider.server }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/telemetry/declare"
     method: POST
     user: admin
     password: "{{ vpass}}"
