@@ -1,27 +1,36 @@
-# Role Name
+# Ansible Role: Integrate F5 Beacon with AS3
 
-A brief description of the role goes here.
+Configures [Telemetry Streaming](https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/) on BIG-IP and then syncs AS3 apps between BIG-IP and Beacon.
 
 ## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Specifies the AS3 declaration in JSON format (see [example](../../host_vars/zcheng-aws-bigip/apps.json)):
+
+    as3json
+
+Specifies the apps that should be updated in Beacon (see [example](../../vars/beacon_apps.yaml)):
+
+    bcon_apps
 
 ## Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* A BIG-IP version 12.0.0 or newer, configured with the F5 Automation Toolchain (handled via the f5devcentral.f5app_services_package role)
 
-## Example Playbook
+## Example Usage
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+    - name: Update Beacon
+      include_role:
+        name: f5devcentral.f5_as3_beacon
+      when: bcon_enabled |bool
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+## License
+
+Apache
 
 ## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role was created in 2019 by [focrensh](https://github.com/focrensh).
