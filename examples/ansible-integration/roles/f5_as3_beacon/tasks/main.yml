@@ -7,7 +7,6 @@
       username: "{{ bcon_username }}"
       password: "{{ bcon_password }}"
     body_format: json
-    validate_certs: no
   delegate_to: localhost
   register: bconauth
 
