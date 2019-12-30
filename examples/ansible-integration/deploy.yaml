@@ -167,5 +167,5 @@
 
     - name: Update Beacon
       include_role:
-        name: f5_as3_beacon
+        name: f5devcentral.f5_as3_beacon
       when: bcon_enabled |bool
