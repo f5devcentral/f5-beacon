@@ -8,7 +8,7 @@ None
 
 ## Role Variables
 
-Specifies the AS3 declaration in JSON format (see [example](../../host_vars/zcheng-aws-bigip/apps.json)):
+Specifies the AS3 declaration in JSON format (see [example](../../host_vars/<your_desired_BIG-IP_hostname>/apps.json)):
 
     as3json
 
@@ -18,7 +18,7 @@ Specifies the apps that should be updated in Beacon (see [example](../../vars/be
 
 ## Dependencies
 
-* A BIG-IP version 12.0.0 or newer, configured with the F5 Automation Toolchain (handled via the f5devcentral.f5app_services_package role)
+- A BIG-IP version 12.0.0 or newer, configured with the F5 Automation Toolchain (handled via the f5devcentral.f5app_services_package role)
 
 ## Example Usage
 

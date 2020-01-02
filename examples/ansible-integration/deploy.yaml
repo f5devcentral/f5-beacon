@@ -1,5 +1,5 @@
 - name: boot_aws
-  hosts: zcheng-aws-bigip
+  hosts: <your_desired_BIG-IP_hostname>
   connection: local
   gather_facts: false
 

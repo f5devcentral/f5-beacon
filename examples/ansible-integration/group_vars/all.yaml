@@ -1,9 +1,9 @@
-ssh_keyfile: "~/.aws/zcheng-aws-exp_key_pair.pem"
+ssh_keyfile: "~/.aws/<your_key_pair_file.pem>"
 ami: ami-0b1ddb58daf258014
-aws_ssh_key: zcheng-aws
+aws_ssh_key: <your key pair name>
 aws_instance_type: t2.large
-aws_sg: zcheng-sg
-aws_vpc_subnet: subnet-7d3b6c21
+aws_sg: <your security group name>
+aws_vpc_subnet: <your subnet name>
 git_repo: https://github.com/f5devcentral/f5-beacon.git
 region: us-east-1
 rpms:
