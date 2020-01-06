@@ -154,11 +154,9 @@ Finally, the insight is published to the F5 Beacon, and is then available in the
 Code can be deployed to AWS using the command below:
 
 ```
-   $ severless deploy
+   $ serverless deploy
 ```
-
 or 
-
 ```
     $ sls deploy
 ```
@@ -168,8 +166,10 @@ or
 
 For example, 
 ```
-    $ severless deploy --stage production --region eu-central-1
+    $ serverless deploy --stage production --region eu-central-1
 ```
+
+* Documentation on using `serverless` can be found at: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy/   
 
 Once uploaded, you can then set the credentials and preferred account as input.
 
