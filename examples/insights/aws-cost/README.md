@@ -149,6 +149,9 @@ Finally, the insight is published to the F5 Beacon, and is then available in the
     }
 ```
 
+### Pre-requisites
+Installing the Serverless Framework: https://www.npmjs.com/package/serverless
+
 ### Deploy Code to AWS
 
 Code can be deployed to AWS using the command below:
