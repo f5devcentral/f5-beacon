@@ -151,6 +151,14 @@ Finally, the insight is published to the F5 Beacon, and is then available in the
 
 ### Pre-requisites
 Installing the Serverless Framework: https://www.npmjs.com/package/serverless
+```
+npm install -g serverless
+```
+
+Installing other dependencies:
+```
+npm install
+```
 
 ### Deploy Code to AWS
 
