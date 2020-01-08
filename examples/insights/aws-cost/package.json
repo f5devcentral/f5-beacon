@@ -6,10 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@gitswarm.f5net.com:shsharma/beacon-cost-insight.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,7 +13,8 @@
     "aws-sdk": "^2.594.0",
     "dateformat": "^3.0.3",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "serverless": "^1.60.5"
   },
   "devDependencies": {
     "serverless-offline": "^5.12.1"

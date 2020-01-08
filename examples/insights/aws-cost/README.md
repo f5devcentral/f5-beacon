@@ -149,16 +149,25 @@ Finally, the insight is published to the F5 Beacon, and is then available in the
     }
 ```
 
+### Pre-requisites
+Installing the Serverless Framework: https://www.npmjs.com/package/serverless
+```
+npm install -g serverless
+```
+
+Installing other dependencies:
+```
+npm install
+```
+
 ### Deploy Code to AWS
 
 Code can be deployed to AWS using the command below:
 
 ```
-   $ severless deploy
+   $ serverless deploy
 ```
-
 or 
-
 ```
     $ sls deploy
 ```
@@ -168,8 +177,10 @@ or
 
 For example, 
 ```
-    $ severless deploy --stage production --region eu-central-1
+    $ serverless deploy --stage production --region eu-central-1
 ```
+
+* Documentation on using `serverless` can be found at: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy/   
 
 Once uploaded, you can then set the credentials and preferred account as input.
 
@@ -181,8 +192,11 @@ The code can then be executed.
 
 The results can be checked in F5 Beacon under the Insights Page.
 
-### Run AWS Lambda periodically
+### Run AWS Lambda Periodically
 
 To gather insight details over a long period of time it is common to run the function periodically and update the insight with the latest details. Depending upon a user's need, a user might want to run it every hour, day or week for a meaningful report. In our simplified example, we will want to run the function every day. We will utilize the AWS CloudWatch Events scheduler to configure periodic execution:
 
 ![](images/CloudWatch_Schedule.png)
+
+Scheduling a handler to run periodically can also be done using Serverless Framework: https://serverless.com/framework/docs/providers/aws/events/schedule/
+
