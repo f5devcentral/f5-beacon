@@ -20,7 +20,3 @@ provider:
 functions:
   costInsight:
     handler: handler.costInsight
-    events:
-      - http:
-         path: /
-         method: post
