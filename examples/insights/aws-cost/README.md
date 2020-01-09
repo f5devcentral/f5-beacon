@@ -188,7 +188,7 @@ Once uploaded, you can then set the credentials and preferred account as input.
 
 The code can then be executed.
 
-![](images/AWSCodeDeploy.png)
+![](images/CostInsightDeploy.png)
 
 The results can be checked in F5 Beacon under the Insights Page.
 
