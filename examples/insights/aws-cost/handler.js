@@ -128,7 +128,7 @@ module.exports.costInsight = async event => {
             const costRes = await getCost(StartDate, EndDate);
             const createdInsight = createInsight(costRes);
             await publishCostInsight(createdInsight, jsonData.accountid);
-            console.log('Cost Insight created and published.');
+            return 'Cost Insight created and published.';
         } catch (e) {
             console.log(e);
         }
