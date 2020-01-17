@@ -6,11 +6,12 @@ This example demonstrates one way in which Beacon can be integrated with an Ansi
 - provision the BIG-IP via definitions within the [host_vars](host_vars) folder
 - deploy [AS3 appplications](host_vars/localhost/apps.json) to the BIG-IP
 - update Beacon apps based on the AS3 apps deloyed
+<br>
   Though the playbook creates a BIG-IP, this example is focused on Beacon integration.
 
 #### Requirements
 
-- Python env with the dependencies noted in [py_requirements.txt](py_requirements.txt) (install all via `pip install -r py_requirements.txt`)
+- Python 3.x env with the dependencies noted in [py_requirements.txt](py_requirements.txt) (install all via `pip install -r py_requirements.txt`)
 - AWS SSH key, Security Group, VPC
   - specified in [all.yaml](group_vars/all.yaml)
 - AWS EIP

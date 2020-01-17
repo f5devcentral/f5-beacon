@@ -84,7 +84,7 @@
           vars:
             f5app_services_package_url: "{{ rpms[item] }}"
             f5app_services_package_path: "{{ playbook_dir }}/files/{{ rpms[item].split('/')[-1] }}"
-          loop: "{{ rpms.keys() }}"
+          loop: "{{ rpms.keys() | list }}"
           loop_control:
             pause: 6
 

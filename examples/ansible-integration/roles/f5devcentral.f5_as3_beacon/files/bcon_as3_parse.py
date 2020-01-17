@@ -53,10 +53,10 @@ def comp_id_dict(l):
 # Provides Existing Apps from Beacon
 def app_update(l):
   for a in l:
-    appdict[a['json']['name']] = {}
-    appdict[a['json']['name']]['body'] = a['json']
-    appdict[a['json']['name']]['state'] = "existing"
-    appdict[a['json']['name']]['as3_dependencies'] = []
+    appdict[a['name']] = {}
+    appdict[a['name']]['body'] = a
+    appdict[a['name']]['state'] = "existing"
+    appdict[a['name']]['as3_dependencies'] = []
 
 # ### Gather data from functions above
 comp_id_dict(bcon_comp)

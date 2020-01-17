@@ -1,40 +1,40 @@
 ---
-# Retrieve existing apps from Beacon defined within Ansible
-- name: Get current Beacon app IDs by name
+# Retrieve existing apps from Beacon
+- name: Get current Beacon apps
   uri:
-    url: "https://api.cloudservices.f5.com/beacon/v1/applications?filter=name={{ item.key }}"
-    method: GET
+    url: "https://api.cloudservices.f5.com/beacon/v1/declare"
+    method: POST
+    body:
+      action: "get"
     headers:
       Authorization: "Bearer {{ bconauth.json.access_token }}"
       Content-Type: "application/json"
     body_format: json
   delegate_to: localhost
-  register: all_bcon_apps
-  with_dict: "{{ bcon_apps }}"
+  register: acc_bcon_declare_item
 
-# Empty list for Beacon app IDs to retrieve
+- debug: var=acc_bcon_declare_item
+
 - set_fact:
-    appids: []
+    all_bcon_apps: []
 
-- name: Update list of app IDs
+- name: Update list of apps
   set_fact:
-    appids: "{{ appids + [ item.json.apps[0].id ] }}"
-  loop: "{{ all_bcon_apps.results }}"
-  when: item.json.apps | length > 0
+    all_bcon_apps: "{{ all_bcon_apps + [ item.application ] }}"
+  loop: "{{ acc_bcon_declare_item.json.declaration }}"
+  when: item.application | length > 0
 
-- debug: var=appids
+- debug: var=all_bcon_apps
 
-- name: Get current Beacon apps by ID
-  uri:
-    url: "https://api.cloudservices.f5.com/beacon/v1/applications/{{ item }}"
-    method: GET
-    headers:
-      Authorization: "Bearer {{ bconauth.json.access_token }}"
-      Content-Type: "application/json"
-    body_format: json
-  delegate_to: localhost
-  register: complete_bcon_apps
-  loop: "{{ appids }}"
+- set_fact:
+    complete_bcon_apps: []
+
+# Filter the apps based on beacon_apps var
+- name: Filter the apps
+  set_fact:
+    complete_bcon_apps: "{{ complete_bcon_apps + [ item[1] ] }}"
+  when: item[0].key == item[1].name
+  loop: "{{ bcon_apps|dict2items |product(all_bcon_apps)|list }}"
 
 - debug: var=complete_bcon_apps
 
@@ -52,7 +52,7 @@
 - debug: var=all_bcon_components.json.componentsHealth
 
 # Parse AS3/Beacon data for appropriate actions
-- command: "python {{ role_path }}/files/bcon_as3_parse.py '''{{ as3json | to_json }}''' '''{{ complete_bcon_apps.results | to_json }}''' '''{{ all_bcon_components.json.componentsHealth | to_json }}''' '''{{ env_hostname }}'''"
+- command: "python {{ role_path }}/files/bcon_as3_parse.py '''{{ as3json | to_json }}''' '''{{ complete_bcon_apps | to_json }}''' '''{{ all_bcon_components.json.componentsHealth | to_json }}''' '''{{ env_hostname }}'''"
   register: as3_apps
   delegate_to: localhost
 
