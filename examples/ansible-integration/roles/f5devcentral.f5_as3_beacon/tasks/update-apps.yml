@@ -11,32 +11,32 @@
       Content-Type: "application/json"
     body_format: json
   delegate_to: localhost
-  register: acc_bcon_declare_item
+  register: bcon_declare_item
 
-- debug: var=acc_bcon_declare_item
+- debug: var=bcon_declare_item
 
 - set_fact:
-    all_bcon_apps: []
+    all_apps_from_bcon: []
 
 - name: Update list of apps
   set_fact:
-    all_bcon_apps: "{{ all_bcon_apps + [ item.application ] }}"
-  loop: "{{ acc_bcon_declare_item.json.declaration }}"
+    all_apps_from_bcon: "{{ all_apps_from_bcon + [ item.application ] }}"
+  loop: "{{ bcon_declare_item.json.declaration }}"
   when: item.application | length > 0
 
-- debug: var=all_bcon_apps
+- debug: var=all_apps_from_bcon
 
 - set_fact:
-    complete_bcon_apps: []
+    managed_apps_from_bcon: []
 
 # Filter the apps based on beacon_apps var
 - name: Filter the apps
   set_fact:
-    complete_bcon_apps: "{{ complete_bcon_apps + [ item[1] ] }}"
+    managed_apps_from_bcon: "{{ managed_apps_from_bcon + [ item[1] ] }}"
   when: item[0].key == item[1].name
-  loop: "{{ bcon_apps|dict2items |product(all_bcon_apps)|list }}"
+  loop: "{{ bcon_apps|dict2items |product(all_apps_from_bcon)|list }}"
 
-- debug: var=complete_bcon_apps
+- debug: var=managed_apps_from_bcon
 
 - name: Get current Beacon components
   uri:
@@ -52,7 +52,7 @@
 - debug: var=all_bcon_components.json.componentsHealth
 
 # Parse AS3/Beacon data for appropriate actions
-- command: "python {{ role_path }}/files/bcon_as3_parse.py '''{{ as3json | to_json }}''' '''{{ complete_bcon_apps | to_json }}''' '''{{ all_bcon_components.json.componentsHealth | to_json }}''' '''{{ env_hostname }}'''"
+- command: "python {{ role_path }}/files/bcon_as3_parse.py '''{{ as3json | to_json }}''' '''{{ managed_apps_from_bcon | to_json }}''' '''{{ all_bcon_components.json.componentsHealth | to_json }}''' '''{{ env_hostname }}'''"
   register: as3_apps
   delegate_to: localhost
 
