@@ -1,0 +1,14 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: f5_as3_beacon
+  author: focrensh
+  description: Configure and integrate F5 Beacon with AS3 on BIG-IP
+  company: F5 Networks
+  license: Apache
+  min_ansible_version: 2.4
+  galaxy_tags:
+    - f5
+    - networking
+    - bigip

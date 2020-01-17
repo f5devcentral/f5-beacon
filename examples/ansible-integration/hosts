@@ -1,0 +1,4 @@
+localhost ansible_python_interpreter=/usr/local/bin/python
+
+[bigips]
+<your_desired_BIG-IP_hostname>

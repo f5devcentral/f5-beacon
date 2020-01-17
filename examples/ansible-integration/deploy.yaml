@@ -1,0 +1,171 @@
+- name: boot_aws
+  hosts: <your_desired_BIG-IP_hostname>
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - ../vaults/creds_encrypted.yaml
+
+  tasks:
+    - name: Get Current BIG-IP Instances
+      ec2_instance_facts:
+        region: "{{ region }}"
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        filters:
+          "tag:ansible": "{{ aws_tag}}"
+          instance-state-name: ["running"]
+      register: inst
+      delegate_to: localhost
+
+    - set_fact:
+        env_hostname: "{{ inst.instances.0.private_dns_name }}"
+      when: inst.instances|length == 1
+
+    # Onboard new BIG-IP if it does not exist
+    - name: Onboard new BIG-IP
+      block:
+        - name: Create BIG-IP EC2
+          ec2:
+            aws_access_key: "{{ aws_access_key }}"
+            aws_secret_key: "{{ aws_secret_key }}"
+            key_name: "{{ aws_ssh_key }}"
+            instance_type: "{{ aws_instance_type }}"
+            image: "{{ ami }}"
+            wait: true
+            group: "{{ aws_sg }}"
+            instance_tags:
+              ansible: "{{ aws_tag }}"
+              Name: "{{ inventory_hostname }}"
+            vpc_subnet_id: "{{ aws_vpc_subnet }}"
+            region: "{{ region }}"
+          register: ec2
+          delegate_to: localhost
+
+        - set_fact:
+            env_hostname: "{{ ec2.instances.0.private_dns_name }}"
+
+        - name: Update EIP
+          ec2_eip:
+            aws_access_key: "{{ aws_access_key }}"
+            aws_secret_key: "{{ aws_secret_key }}"
+            region: "{{ region }}"
+            device_id: "{{ ec2.instances[0].id }}"
+            private_ip_address: "{{ ec2.instances[0].private_ip }}"
+            public_ip: "{{ hostvars[inventory_hostname].provider.server }}"
+            allow_reassociation: yes
+          delegate_to: localhost
+
+        - name: Wait for BIG-IP on port 8443
+          wait_for:
+            host: "{{ hostvars[inventory_hostname].provider.server }}"
+            port: "{{ hostvars[inventory_hostname].provider.server_port }}"
+          delegate_to: localhost
+
+        - name: Change BIG-IP admin password
+          bigip_command:
+            provider:
+              server: "{{ hostvars[inventory_hostname].provider.server }}"
+              ssh_keyfile: "{{ ssh_keyfile }}"
+              transport: cli
+              user: "{{ hostvars[inventory_hostname].provider.user }}"
+            commands: modify auth user {{ hostvars[inventory_hostname].provider.user }} password {{ vpass }}
+          delegate_to: localhost
+
+        - name: Wait for API to be up
+          bigip_wait:
+            timeout: 150
+            provider: "{{ provider }}"
+          delegate_to: localhost
+
+        - name: Download and Install AT RPMs
+          include_role:
+            name: f5devcentral.f5app_services_package
+          vars:
+            f5app_services_package_url: "{{ rpms[item] }}"
+            f5app_services_package_path: "{{ playbook_dir }}/files/{{ rpms[item].split('/')[-1] }}"
+          loop: "{{ rpms.keys() | list }}"
+          loop_control:
+            pause: 6
+
+        - pause:
+            seconds: 5
+
+        - name: Push DO
+          uri:
+            url: "https://{{ hostvars[inventory_hostname].provider.server  }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/declarative-onboarding"
+            method: POST
+            user: admin
+            password: "{{ vpass}}"
+            body: "{{ lookup('template','host_vars/' + inventory_hostname + '/do.json') }}"
+            status_code: 202
+            timeout: 30
+            body_format: json
+            validate_certs: no
+          delegate_to: localhost
+
+        - name: Wait for DO to finish
+          uri:
+            url: "https://{{ hostvars[inventory_hostname].provider.server  }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/declarative-onboarding"
+            user: admin
+            password: "{{ vpass }}"
+            status_code: 202, 200
+            validate_certs: no
+          register: dostatus
+          delegate_to: localhost
+          ignore_errors: true
+          until: dostatus.status == 200
+          retries: 30
+          delay: 10
+
+        - pause:
+            seconds: 10
+
+      when: inst.instances|length == 0
+
+      # End Onboard new BIG-IP
+    - pause:
+        seconds: 5
+
+    - name: Push AS3 (LTM)
+      uri:
+        url: "https://{{ hostvars[inventory_hostname].provider.server }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/appsvcs/declare?async=true"
+        method: POST
+        user: admin
+        password: "{{ vpass  }}"
+        body: "{{ lookup('template','host_vars/' + inventory_hostname + '/apps.json') }}"
+        status_code: 202
+        timeout: 300
+        body_format: json
+        validate_certs: no
+      register: as3_task
+      delegate_to: localhost
+
+    - name: Wait for AS3 to finish
+      uri:
+        url: "https://{{ hostvars[inventory_hostname].provider.server }}:{{ hostvars[inventory_hostname].provider.server_port }}/mgmt/shared/appsvcs/task/{{ as3_task.json.id }}"
+        user: admin
+        password: "{{ vpass }}"
+        status_code: 200
+        validate_certs: no
+      register: as3status
+      delegate_to: localhost
+      ignore_errors: true
+      until: as3status.json.results[0].message != "in progress"
+      retries: 10
+      delay: 5
+
+    - debug: var=as3status
+
+    - set_fact:
+        as3_change: true
+      when: as3status.json.results[0].message == "success"
+
+    - include_vars:
+        file: "{{ playbook_dir }}/vars/beacon_apps.yaml"
+      when: bcon_enabled |bool
+
+    - name: Update Beacon
+      include_role:
+        name: f5devcentral.f5_as3_beacon
+      when: bcon_enabled |bool

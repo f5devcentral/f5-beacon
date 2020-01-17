@@ -1,0 +1,11 @@
+---
+### Connection parameters
+provider:
+  server: <your EC2 Elastic IP addresses>
+  server_port: 8443
+  user: admin
+  password: "{{ vpass }}"
+  validate_certs: false
+  transport: rest
+
+f5app_services_package_state: present

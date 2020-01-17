@@ -1,0 +1,58 @@
+---
+
+- name: Validate mandatory parameter f5app_services_package_path is present
+  fail:
+    msg: "The f5app_services_package_path parameter is not defined."
+  when:
+    - f5app_services_package_path is not defined
+
+- name: Validate mutually exclusive parameters are not present
+  fail:
+    msg: "The 'f5app_services_package_checksum_url' and 'f5app_services_package_checksum ' parameters cannot be specified together."
+  when:
+    - f5app_services_package_checksum_url is defined and f5app_services_package_checksum is defined
+
+- name: Download an RPM package to controller, no checksum validation
+  get_url:
+    url: "{{ f5app_services_package_url }}"
+    dest: "{{ f5app_services_package_path }}"
+    validate_certs: false
+  when:
+    - f5app_services_package_checksum_url is not defined and f5app_services_package_checksum is not defined
+  delegate_to: localhost
+
+- name: Download an RPM package to controller, checksum validation from url
+  get_url:
+    url: "{{ f5app_services_package_url }}"
+    dest: "{{ f5app_services_package_path }}"
+    checksum: "sha256:{{ f5app_services_package_checksum_url }}"
+    validate_certs: false
+  when:
+    - f5app_services_package_checksum_url is defined
+  delegate_to: localhost
+
+- name: Download an RPM package to controller, checksum validation from variable
+  get_url:
+    url: "{{ f5app_services_package_url }}"
+    dest: "{{ f5app_services_package_path }}"
+    checksum: "sha256:{{ f5app_services_package_checksum }}"
+    validate_certs: false
+  when:
+    - f5app_services_package_checksum is defined
+  delegate_to: localhost
+
+- name: Check the RPM file is downloaded and present
+  stat:
+    path: "{{ f5app_services_package_path }}"
+  register: rpmstatus
+  until: rpmstatus.stat.exists
+  retries: 10
+  delay: 15
+  delegate_to: localhost
+
+- name: Install RPM Package After Download
+  bigip_lx_package:
+    package: "{{ f5app_services_package_path }}"
+    provider: "{{ provider }}"
+    state: "present"
+  delegate_to: localhost

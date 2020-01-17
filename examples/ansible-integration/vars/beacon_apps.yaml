@@ -1,0 +1,32 @@
+bcon_apps:
+  IT:
+    labels:
+      costcenter: "400"
+      department: IT
+      location: Azure
+      owner: The Avengers
+      region: US East
+  HR:
+    labels:
+      costcenter: "300"
+      department: HR
+      location: AWS
+      owner: The Avengers
+      region: US East
+  PM:
+    labels:
+      costcenter: "100"
+      department: PM
+      location: AWS
+      owner: DC
+      region: US East
+      auto-deployed: "Yes"
+      deployed-via: "Ansible"
+      country: "US"
+  SUPPORT:
+    labels:
+      costcenter: "300"
+      department: Support
+      location: AWS
+      owner: Quest
+      region: US East
