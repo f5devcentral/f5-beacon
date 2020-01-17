@@ -1,3 +1,6 @@
 #IDEA
 .idea/
 *.iml
+# other files
+.DS_Store
+*.xml
