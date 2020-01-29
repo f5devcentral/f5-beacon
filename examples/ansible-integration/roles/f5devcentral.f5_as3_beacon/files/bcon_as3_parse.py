@@ -87,11 +87,11 @@ for k, v in appdict.iteritems():
 for app, v in appdict.iteritems():
   for dep in v['as3_dependencies']:
     if appdict[app]['state'] == "existing":
-      appdict[app]['body']['dependencies'].append({"name": str(reverse_compdict[dep]),"healthSourceSettings": {"metrics":[{ "measurementName":"BeaconHealth","tags":{"name":str(reverse_compdict[dep]),"source": env_hostname}}]}})
+      appdict[app]['body']['dependencies'].append({"name": str(reverse_compdict[dep]),"healthSourceSettings": {"metrics":[{ "measurementName":"bigip-virtual","tags":{"name":str(reverse_compdict[dep]),"source": env_hostname}}]}})
     if appdict[app]['state'] == "new":
       if "dependencies" not in appdict[app]['body']:
         appdict[app]['body']['dependencies'] = []
-      appdict[app]['body']['dependencies'].append({"name": str(reverse_compdict[dep]),"healthSourceSettings": {"metrics":[{ "measurementName":"BeaconHealth","tags":{"name":str(reverse_compdict[dep]),"source":env_hostname}}]}})
+      appdict[app]['body']['dependencies'].append({"name": str(reverse_compdict[dep]),"healthSourceSettings": {"metrics":[{ "measurementName":"bigip-virtual","tags":{"name":str(reverse_compdict[dep]),"source":env_hostname}}]}})
 
 def transform_body(body, app):
   new_body = {"name": app}
