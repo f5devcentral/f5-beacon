@@ -12,11 +12,20 @@ For more information, visit: https://f5.com/beacon
 
 This repository includes resources, artifacts and examples that can be leveraged with F5 Beacon. 
 
+### Examples
+
+- Insights
+  - aws-cost
+  - telegraf-ping
+
+### Ansible Integration
+For using F5 Beacon with Ansible, please use our [Collection](https://galaxy.ansible.com/f5networks/f5_beacon).
+
+
 ## Documentation
 
 For the documentation on F5 Beacon, refer to our user guide at:<br>
 [https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html](https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html)
-
 
 ## Support Information
 
