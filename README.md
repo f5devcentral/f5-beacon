@@ -21,6 +21,9 @@ This repository includes resources, artifacts and examples that can be leveraged
 ### Ansible Integration
 For using F5 Beacon with Ansible, please use our [Collection](https://galaxy.ansible.com/f5networks/f5_beacon).
 
+### F5 SDK/CLI
+For using F5 Beacon with the F5 SDK/CLI, please check [F5 SDK](https://clouddocs.f5.com/sdk/f5-sdk-python/) and [F5 CLI](https://clouddocs.f5.com/sdk/f5-cli/) for installation and instructions.
+
 
 ## Documentation
 
