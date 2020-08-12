@@ -15,8 +15,8 @@ This repository includes resources, artifacts and examples that can be leveraged
 ### Examples
 
 - Insights
-  - aws-cost
-  - telegraf-ping
+  - [aws-cost](examples/insights/aws-cost)
+  - [telegraf-ping](examples/insights/telegraf-ping)
 
 ### Ansible Integration
 For using F5 Beacon with Ansible, please use our [Collection](https://galaxy.ansible.com/f5networks/f5_beacon).
