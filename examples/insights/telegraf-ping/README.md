@@ -61,7 +61,7 @@ The handler function describes the main operations of the Lambda function:
 The Lambda function is logging in to F5 Cloud Service as described in the [Authenticate against F5 Cloud Services API](https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-WorkWith.html#authenticate-against-f5-cloud-service-api) section and
 using the [login API](https://portal.cloudservices.f5.com/docs.html#operation/Login) from the authentication service.
 
-The 'Username', 'Password' and 'Prefered account' used to authenticate and execute API calls against Beacon are provided to the Lambda function as JSON input as shown below:
+The 'Username', 'Password' and 'Preferred account' used to authenticate and execute API calls against Beacon are provided to the Lambda function as JSON input as shown below:
 
    ```json
     {
