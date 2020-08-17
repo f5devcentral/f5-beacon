@@ -2,7 +2,7 @@
 
 [Fluentd](https://www.fluentd.org/) is a great tool to unify data collection and consumption.  There are a significant number of existing [plugins](https://www.fluentd.org/plugins/all) to integrate various sources.  In addition, there are plugins for filtering and parsing data within Fluentd before routing to an output.  The [Beacon plugin](https://github.com/f5devcentral/fluent-plugin-f5-beacon) feeds data to Beacon via the same mechanism as [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/).  This means the Fluentd data is mapped to measurements, tags and fields for ingestion into Beacon.
 
-The measurement is determined either via the via the `measurement` parameter within the Fluentd configuration for the Beacon plugin, or via the Fluentd tag.  The match directive for the Beacon plugin defines what Fluentd tags are routed to the Beacon output plugin.  Data within Fluentd events are mapped to tags and fields in a similar fashion.  If the `auto_tags` parameter is used for the Beacon plugin, then string values are mapped to tags and all else are mapped to fields.  The alternative is to use the `tag_keys` parameter to define the data elements that are mapped to tags.
+The measurement is determined either via the `measurement` parameter within the Fluentd configuration for the Beacon plugin, or via the Fluentd tag.  The match directive for the Beacon plugin defines what Fluentd tags are routed to the Beacon output plugin.  Data within Fluentd events are mapped to tags and fields in a similar fashion.  If the `auto_tags` parameter is used for the Beacon plugin, then string values are mapped to tags and all else are mapped to fields.  The alternative is to use the `tag_keys` parameter to define the data elements that are mapped to tags.
 
 If the Fluentd data contains more complex data elements (arrays, nested objects), the data will typically need to be passed through additional Fluentd plugins to make it usable by Beacon.  By default, the Beacon plugin discards such elements.  When this happens, it will be noted in the Fluentd log:
 
@@ -149,7 +149,7 @@ By default, the timestamp sent to Beacon will be Fluentd's event timestamp.  If 
 }
 ```
 
-In this case, we'd like to still apply the splitting and flattening discussed previously and afterwards, use `recordTime` as the event timestamp.  To address this, we could apply a filter that parses the time before processing by the Beacon plugin.  For this case, we use the [fluent-plugin-filter_typecast](https://github.com/sonots/fluent-plugin-filter_typecast) filter plugin as an example.  The configuration might look similar to:
+In this case, we still need to apply the splitting and flattening discussed previously and then afterwards, use `recordTime` as the event timestamp.  To address this, we could apply a filter that parses the time before processing by the Beacon plugin.  For this case, we use the [fluent-plugin-filter_typecast](https://github.com/sonots/fluent-plugin-filter_typecast) filter plugin as an example.  The configuration might look similar to:
 
 ```
 <filter pattern>
