@@ -57,7 +57,19 @@ The key metric data is embedded within the `data` array, which contains three se
 </match>
 ```
 
-The Beacon plugin can then match `foo.split` to receive the individual records for processing.
+The Beacon plugin can then match `foo.split` to receive the individual records for processing, the first of which being:
+
+```
+{
+    "1xx": 0,
+    "2xx": 38,
+    "3xx": 0,
+    "4xx": 0,
+    "5xx": 0
+}
+```
+
+The second and third records would look similar.
 
 There are a handful of output/filter plugins that do similar manipulations and can be used for various use cases.
 
