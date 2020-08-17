@@ -18,6 +18,7 @@ This repository includes resources, artifacts and examples that can be leveraged
   - [aws-cost](examples/insights/aws-cost)
   - [telegraf-ping](examples/insights/telegraf-ping)
 - Fluentd
+  - [General guidance](examples/fluentd)
   - [Application Performance Monitoring with NGINX](examples/fluentd/nginx)
 
 ### Ansible Integration
