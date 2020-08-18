@@ -1,6 +1,6 @@
 # AWS Cost Insight
 
-F5 Beacon provides a centralized location(Insights View) to get insightful information about an application's ecosystem.
+F5 Beacon provides a centralized location (Insights View) to get insightful information about an application's ecosystem.
 These insights are categorized into Cost, Operations or Security. AWS Cost Insight is one of the examples which fall under the Cost Category and using the lambda can directly be imported into F5 Beacon's Insights View.
 
 ![](images/CostInsight_F5_Portal.png)
@@ -9,7 +9,7 @@ These insights are categorized into Cost, Operations or Security. AWS Cost Insig
 
 ### Giving Access to Billing Information
 
-Access to AWS Billing Information has been given by setting the IAM Role Permission in file `serverless.yml`.  
+Access to AWS Billing Information has been given by setting the IAM Role Permission in file `serverless.yml`.
 By default access has been provided to **ce:GetCostAndUsage** Action of AWS Cost Explorer. You can update the `iamRoleStatements` in `serverless.yml` file to change permissions.
 
 ```
@@ -30,15 +30,15 @@ It is your responsibility to:
 ### Cost Insight
 
 In this section, we will detail how to utilize the F5 Beacon Insights API to build a Cost Insight using AWS.
-We will utilize an AWS Lambda function to query Beacon Insights API and update the total AWS Cost incurred over the past 12 months as well as monthly distribution. 
+We will utilize an AWS Lambda function to query Beacon Insights API and update the total AWS Cost incurred over the past 12 months as well as monthly distribution.
 
 In this example we will build a Lambda function in NodeJS with the following entry point in `costInsight` handler function:
 
 ```
     module.exports.costInsight = async event => {
-    
+
      ...
-     
+
     }
 ```
 
@@ -62,7 +62,7 @@ The JSON input fields are defined as below:
      }
 ```
 
-### Get AWS Cost Information 
+### Get AWS Cost Information
 
 To get the cost information from AWS, we use AWS Cost Explorer. We can set edit the cost parameters using `costParams` to get tailored information according to the needs.
 As default, Granularity has been set to a month, and metrics being pulled is Amortized Cost.
@@ -94,8 +94,8 @@ As default, Granularity has been set to a month, and metrics being pulled is Amo
 
 ### Create Cost Insight
 
-After the cost has been pulled, the insight is generated. This is done so that different parameters like 'title', 'description', 'category', 'severity', and 'markdownContent' can be set. 
-the parameter 'markdownContent' is where the AWS cost is used to display it in a tabular fashion. 
+After the cost has been pulled, the insight is generated. This is done so that different parameters like 'title', 'description', 'category', 'severity', and 'markdownContent' can be set.
+the parameter 'markdownContent' is where the AWS cost is used to display it in a tabular fashion.
 
 ```
     function createInsight(CostArray) {
@@ -119,7 +119,7 @@ the parameter 'markdownContent' is where the AWS cost is used to display it in a
             };
             resolve(created_insight);
         });
-    } 
+    }
 ```
 
 ### Publish Insight
@@ -167,7 +167,7 @@ Code can be deployed to AWS using the command below:
 ```
    $ serverless deploy
 ```
-or 
+or
 ```
     $ sls deploy
 ```
@@ -175,12 +175,12 @@ or
 * Default stage has been configured to `dev`. This can be changed by using the flag `--stage` or `-s` to set the stage in the service.
 * Default region has been set to `us-east-1`. This can be changed by using the flag `--region` or `-r`.
 
-For example, 
+For example,
 ```
     $ serverless deploy --stage production --region eu-central-1
 ```
 
-* Documentation on using `serverless` can be found at: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy/   
+* Documentation on using `serverless` can be found at: https://serverless.com/framework/docs/providers/aws/cli-reference/deploy/
 
 Once uploaded, you can then set the credentials and preferred account as input.
 
@@ -190,7 +190,7 @@ The code can then be executed.
 
 ![](images/CostInsightDeploy.png)
 
-The results can be checked in F5 Beacon under the Insights Page.
+The results can be checked in F5 Beacon under the Insights page.
 
 ### Run AWS Lambda Periodically
 
