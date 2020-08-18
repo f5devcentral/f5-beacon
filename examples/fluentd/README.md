@@ -7,7 +7,7 @@ The measurement is determined either via the `measurement` parameter within the 
 If the Fluentd data contains more complex data elements (arrays, nested objects), the data will typically need to be passed through additional Fluentd plugins to make it usable by Beacon.  By default, the Beacon plugin discards such elements.  When this happens, it will be noted in the Fluentd log:
 
 ```
-2020-08-10 22:11:16 +0000 [warn]: #0 [f5_beacon] array/hash field 'data' discarded; consider using a plugin to map
+2020-08-10 22:11:16 +0000 [warn]: #0 [f5_beacon] array/hash field 'data' discarded; consider using other Fluentd plugins to properly map it
 ```
 
 ## Splitting arrays
