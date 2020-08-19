@@ -89,7 +89,7 @@ Details for the data received is visible when creating an insight:
 
 ![](images/fields.png)
 
-The data should align with the JSON visible in the log file.  Because `auto_tags` was enabled in the Fluentd configuration, the numeric values were translated to fields (in the column labeled "Metric") and the others were translated to tags (in the column labeled "Filter").
+The data should align with the JSON visible in the log file.  Because `auto_tags` was enabled in the Fluentd configuration, the numeric values were translated to fields and the others were translated to tags.
 
 The data can then be queried to generate insights into the applications.  In this example, request times are compared between two separate upstream servers:
 
