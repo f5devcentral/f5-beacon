@@ -1,6 +1,6 @@
 .PHONY: go
 go: ## go checks module packages
-	$(ECHO) go list -u -m all
+	$(ECHO) go list -u -m -mod=mod all
 	$(ECHO) go mod verify
 	$(ECHO) go mod tidy
 
