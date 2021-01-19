@@ -10,13 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.771.0",
-    "dateformat": "^3.0.3",
+    "aws-sdk": "^2.828.0",
+    "dateformat": "^4.4.1",
     "dateformate": "^1.1.0",
     "package.json": "^2.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "serverless": "^2.7.0"
+    "serverless": "^2.19.0"
   },
   "devDependencies": {
     "serverless-offline": "^6.8.0"
