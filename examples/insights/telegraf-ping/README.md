@@ -25,7 +25,7 @@ Beacon has built-in insights, such as the 'F5 Assets and Inventory' insight deta
 
 In this section, we will detail how to utilize Ping metrics to build a **Ping Insight**.
 We will utilize an AWS Lambda function to periodically query Beacon metrics and update the insight with packet loss information for the last hour. Metrics can be published from any environment -- public cloud, private server or from a local machine.
-The only requirement is accessibility to the [Beacon Insights API](https://portal.cloudservices.f5.com/docs.html#tag/Beacon-Insights).
+The only requirement is accessibility to the [Beacon Insights API](https://portal.cloudservices.f5.com/docs#tag/Beacon-Insights).
 As mentioned, in this example we will build a Lambda function in Golang with the following handler entry point:
 
 ```go
@@ -60,7 +60,7 @@ The handler function describes the main operations of the Lambda function:
 **Login**
 
 The Lambda function is logging in to F5 Cloud Service as described in the [Authenticate against F5 Cloud Services API](https://f5cloudservices.zendesk.com/hc/en-us/articles/360055965333-Beacon-API) section and
-using the [login API](https://portal.cloudservices.f5.com/docs.html#operation/Login) from the authentication service.
+using the [login API](https://portal.cloudservices.f5.com/docs#operation/AuthenticationService_Login) from the authentication service.
 
 The 'Username', 'Password' and 'Preferred account' used to authenticate and execute API calls against Beacon are provided to the Lambda function as JSON input as shown below:
 
