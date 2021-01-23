@@ -1,7 +1,5 @@
 # F5 Beacon
 
-
-
 ## Introduction
 
 F5 Beacon empowers you to achieve full visibility across your application landscape, obtain app insights and business intelligence, and make fast, impactful, and better-informed decisions. With the Beacon Insight Engine, you can leverage pre-built insights or create your own custom insights. Beacon also integrates with many types of deployments across hybrid and multi-cloud environments—and provides a rich set of app stats in a simple, easy-to-consume SaaS model.
@@ -22,16 +20,17 @@ This repository includes resources, artifacts and examples that can be leveraged
   - [Application Performance Monitoring with NGINX](examples/fluentd/nginx)
 
 ### Ansible Integration
+
 For using F5 Beacon with Ansible, please use our [Collection](https://galaxy.ansible.com/f5networks/f5_beacon).
 
 ### F5 SDK/CLI
-For using F5 Beacon with the F5 SDK/CLI, please check [F5 SDK](https://clouddocs.f5.com/sdk/f5-sdk-python/) and [F5 CLI](https://clouddocs.f5.com/sdk/f5-cli/) for installation and instructions.
 
+For using F5 Beacon with the F5 SDK/CLI, please check [F5 SDK](https://clouddocs.f5.com/sdk/f5-sdk-python/) and [F5 CLI](https://clouddocs.f5.com/sdk/f5-cli/) for installation and instructions.
 
 ## Documentation
 
 For the documentation on F5 Beacon, refer to our user guide at:<br>
-[https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html](https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-Beacon-About.html)
+[https://f5cloudservices.zendesk.com/hc/en-us/articles/360055743973-F5-Beacon-Portal-User-s-Guide](https://f5cloudservices.zendesk.com/hc/en-us/articles/360055743973-F5-Beacon-Portal-User-s-Guide)
 
 ## Support Information
 
@@ -39,7 +38,7 @@ This repository is community-supported. Follow instructions below on how to rais
 
 ### Filing Issues and Getting Help
 
-If you come across a bug or other issue, use [GitHub Issues](https://github.com/f5devcentral/f5-beacon/issues) to submit an issue for our team.  You can also see the current known issues on that page, which are tagged with a purple Known Issue label.
+If you come across a bug or other issue, use [GitHub Issues](https://github.com/f5devcentral/f5-beacon/issues) to submit an issue for our team. You can also see the current known issues on that page, which are tagged with a purple Known Issue label.
 
 ## Copyright
 
