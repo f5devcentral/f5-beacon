@@ -1,7 +1,4 @@
 img {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+  border-radius: 1em;
 }
-
-/* img[src*="#rel"] {
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
-} */
