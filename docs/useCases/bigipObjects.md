@@ -1,6 +1,6 @@
 # BIG-IP Object Health
 
-Most application data paths travel through an ADC controller. These controllers calculate health on their own many times using monitors towards the internal orgin servers. Once you connect your BIG-IP environment into Beacon you can then associate applications with specific objects such as **Virtual-Servers** and **Pools**. The health of the Beacon component will default to the health of the BIG-IP object.
+Most application data paths travel through an ADC controller. These controllers calculate health on their own, many times using monitors towards the internal orgin servers. Once you connect your BIG-IP environment into Beacon you can then associate applications with specific objects such as **Virtual-Servers** and **Pools**. The health of the Beacon component will default to the health of the BIG-IP object.
 - Map a BIG-IP Virtual-Server to a Beacon Component within an application.
 - Map a BIG-IP Pool to a Beacon Component within an application.
 

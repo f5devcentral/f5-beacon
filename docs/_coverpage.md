@@ -1,9 +1,9 @@
 <!-- ![logo](media/f5_white_24x24.svg) -->
 
-![logo](media/beacon.png ':size=30%')
+<!-- ![logo](media/beacon.png ':size=30%') -->
 
-# Beacon Working Docs
+<img src="/media/beacon.png"  width="300" height="300" style="box-shadow: 0 0px 0px"/>
 
-> Beacon Working Docs
+# **Beacon Working Docs**
 
-[Get Started](/README.md)
+[Get Started](/?id=beacon-working-docs)
