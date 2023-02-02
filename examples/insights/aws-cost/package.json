@@ -16,7 +16,7 @@
     "package.json": "^2.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "serverless": "^2.19.0"
+    "serverless": "^2.72.3"
   },
   "devDependencies": {
     "serverless-offline": "^6.8.0"
